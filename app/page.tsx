@@ -20,9 +20,9 @@ export default function Home() {
         </Link>
         <Link
           className="p-2 rounded-lg bg-cyan-700 hover:bg-cyan-600 active:bg-cyan-500 "
-          href="/apiFun"
+          href="/darkMode"
         >
-          Button 2
+          Dark Mode
         </Link>
         <Link
           className="p-2 rounded-lg bg-cyan-700 hover:bg-cyan-600 active:bg-cyan-500 "

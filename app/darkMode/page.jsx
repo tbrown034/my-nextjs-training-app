@@ -2,90 +2,90 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const themes = ["default", "red", "blue", "green", "purple"];
+// Define your themes
+const themes = {
+  default: {
+    background: "bg-cyan-900",
+    text: "text-cyan-200",
+    button: "bg-cyan-700 hover:bg-cyan-600 active:bg-cyan-500",
+  },
+  red: {
+    background: "bg-red-500",
+    text: "text-white",
+    button: "bg-red-700 hover:bg-red-600 active:bg-red-500",
+  },
+  green: {
+    background: "bg-green-500",
+    text: "text-white",
+    button: "bg-green-700 hover:bg-green-600 active:bg-green-500",
+  },
+  blue: {
+    background: "bg-blue-500",
+    text: "text-white",
+    button: "bg-blue-700 hover:bg-blue-600 active:bg-blue-500",
+  },
+  purple: {
+    background: "bg-purple-500",
+    text: "text-white",
+    button: "bg-purple-700 hover:bg-purple-600 active:bg-purple-500",
+  },
+  underwater: {
+    background: "bg-gradient-to-r from-blue-400 to-green-400",
+    text: "text-white",
+    button: "bg-blue-700 hover:bg-blue-600 active:bg-blue-500",
+  },
+  forest: {
+    background: "bg-gradient-to-r from-green-400 via-yellow-300 to-brown-400",
+    text: "text-white",
+    button: "bg-green-700 hover:bg-green-600 active:bg-green-500",
+  },
+  desert: {
+    background: "bg-gradient-to-r from-yellow-300 via-orange-500 to-red-500",
+    text: "text-black",
+    button: "bg-yellow-700 hover:bg-yellow-600 active:bg-yellow-500",
+  },
+  sunset: {
+    background: "bg-gradient-to-r from-pink-500 via-red-500 to-purple-500",
+    text: "text-white",
+    button: "bg-pink-700 hover:bg-pink-600 active:bg-pink-500",
+  },
+  party: {
+    background: "bg-gradient-to-r from-pink-400 via-yellow-400 to-green-400",
+    text: "text-white",
+    button: "bg-pink-700 hover:bg-pink-600 active:bg-pink-500",
+  },
+  space: {
+    background: "bg-gradient-to-r from-black via-purple-700 to-blue-700",
+    text: "text-white",
+    button: "bg-purple-700 hover:bg-purple-600 active:bg-purple-500",
+  },
+};
 
 export default function apiFun() {
-  const [theme, setTheme] = useState(themes[0]);
-
-  const nextTheme = () => {
-    const currentThemeIndex = themes.indexOf(theme);
-    const nextThemeIndex = (currentThemeIndex + 1) % themes.length;
-    setTheme(themes[nextThemeIndex]);
-  };
-
-  const getThemeClasses = (theme) => {
-    switch (theme) {
-      case "default":
-        return {
-          bg: "bg-cyan-900",
-          text: "text-cyan-200",
-          btnBg: "bg-cyan-700",
-          hover: "hover:bg-cyan-600",
-          active: "active:bg-cyan-500",
-        };
-      case "red":
-        return {
-          bg: "bg-red-900",
-          text: "text-red-200",
-          btnBg: "bg-red-700",
-          hover: "hover:bg-red-600",
-          active: "active:bg-red-500",
-        };
-      case "blue":
-        return {
-          bg: "bg-blue-900",
-          text: "text-blue-200",
-          btnBg: "bg-blue-700",
-          hover: "hover:bg-blue-600",
-          active: "active:bg-blue-500",
-        };
-      case "green":
-        return {
-          bg: "bg-green-900",
-          text: "text-green-200",
-          btnBg: "bg-green-700",
-          hover: "hover:bg-green-600",
-          active: "active:bg-green-500",
-        };
-      case "purple":
-        return {
-          bg: "bg-purple-900",
-          text: "text-purple-200",
-          btnBg: "bg-purple-700",
-          hover: "hover:bg-purple-600",
-          active: "active:bg-purple-500",
-        };
-      default:
-        return {
-          bg: "",
-          text: "",
-          btnBg: "",
-          hover: "",
-          active: "",
-        };
-    }
-  };
-
-  const themeClasses = getThemeClasses(theme);
+  const [theme, setTheme] = useState(themes.default);
 
   return (
     <main
-      className={`flex flex-col items-center justify-center min-h-screen gap-8 px-4 mx-auto ${themeClasses.bg} ${themeClasses.text}`}
+      className={`flex flex-col items-center justify-center min-h-screen gap-8 px-4 mx-auto ${theme.background} ${theme.text}`}
     >
       <div className="text-center">
-        <h1 className="text-4xl"> Theme Fun 🌈</h1>
-        <h2 className="text-lg">The fun spot to try out different themes!</h2>
+        <h1 className="text-4xl">Fun with Themes! 🎉</h1>
+        <h2 className="text-lg">Choose a color theme or a fun theme!</h2>
       </div>
-      <button
-        onClick={nextTheme}
-        className={`p-2 rounded-lg ${themeClasses.btnBg} ${themeClasses.text} ${themeClasses.hover} ${themeClasses.active} mt-8`}
-      >
-        Next Theme
-      </button>
-      <Link
-        className={`p-2 rounded-lg ${themeClasses.btnBg} ${themeClasses.text} ${themeClasses.hover} ${themeClasses.active}`}
-        href="/"
-      >
+
+      <div className="flex flex-wrap justify-center gap-2">
+        {Object.keys(themes).map((key) => (
+          <button
+            key={key}
+            className={`p-2 rounded-lg ${themes[key].button}`}
+            onClick={() => setTheme(themes[key])}
+          >
+            {key.charAt(0).toUpperCase() + key.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      <Link className={`p-2 rounded-lg ${theme.button}`} href="/">
         Back to Home
       </Link>
     </main>

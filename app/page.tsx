@@ -22,7 +22,7 @@ export default function Home() {
           className="p-2 rounded-lg bg-cyan-700 hover:bg-cyan-600 active:bg-cyan-500 "
           href="/darkMode"
         >
-          Dark Mode
+          Color Themes
         </Link>
         <Link
           className="p-2 rounded-lg bg-cyan-700 hover:bg-cyan-600 active:bg-cyan-500 "

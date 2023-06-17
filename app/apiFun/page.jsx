@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function apiFun() {
   const [testMessage, setTextMessage] = useState(null);
@@ -50,6 +51,12 @@ export default function apiFun() {
         </button>
         {testMessage && <p>{testMessage}</p>}
       </div>
+      <Link
+        className="p-2 rounded-lg bg-cyan-700 hover:bg-cyan-600 active:bg-cyan-500 "
+        href="/"
+      >
+        Back to Home
+      </Link>
     </main>
   );
 }

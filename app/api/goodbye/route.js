@@ -2,7 +2,6 @@
 
 import { NextResponse } from "next/server";
 
-
-export async function GET(request: Request) {
-    return NextResponse.json("Goodbye now 👋 !");
-  }
+export async function GET(Request) {
+  return NextResponse.json("Goodbye now 👋 !");
+}

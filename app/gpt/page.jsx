@@ -8,6 +8,7 @@ export default function Home() {
   const [question, setQuestion] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [aiResponse, setAIResponse] = useState("");
+  const [isLoading, setIsLoading] = useState("");
 
   const handleChange = (e) => {
     setQuestion(e.target.value);
@@ -15,6 +16,8 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Add this line
+
     try {
       const response = await fetch("/api/gpt", {
         method: "POST",
@@ -34,6 +37,8 @@ export default function Home() {
       setIsSubmitted(true);
     } catch (error) {
       console.error("Error fetching AI response:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -41,6 +46,7 @@ export default function Home() {
     setQuestion("");
     setIsSubmitted(false);
     setAIResponse("");
+    setIsLoading(false);
   };
 
   return (
@@ -56,8 +62,9 @@ export default function Home() {
           <button
             className="p-2 rounded-lg bg-cyan-700 hover:bg-cyan-600 active:bg-cyan-500"
             type="submit"
+            disabled={isLoading} // Disable the button while loading
           >
-            Ask AI
+            {isLoading ? "Loading..." : "Ask AI"}
           </button>
         </form>
         <Link
